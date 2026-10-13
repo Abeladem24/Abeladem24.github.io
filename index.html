@@ -222,7 +222,7 @@ footer{text-align:center;padding:40px 16px;font-family:var(--mono);font-size:.78
       <h3>IPguard</h3>
       <p>An IP risk &amp; compliance dashboard that scores patents, trademarks, copyrights, and trade secrets with a weighted risk model, plus live USPTO and case-law search.</p>
       <div class="chips"><span class="chip">Next.js</span><span class="chip">TypeScript</span><span class="chip">USPTO API</span><span class="chip">CourtListener</span></div>
-      <span class="more">read case study →</span>
+      <span class="more">case study + live app →</span>
     </div>
     <div class="card reveal" data-modal="vuln">
       <div class="tag">// cybersecurity · risk</div>
@@ -387,7 +387,7 @@ const modals = {
     <h4>// the problem</h4><p>A company's intellectual property carries real risk: infringement, licensing gaps, unclear ownership, missed deadlines. That risk is usually scattered across spreadsheets, so nobody sees the full exposure.</p>
     <h4>// what I built</h4><ul><li>An IP risk &amp; compliance dashboard that tracks patents, trademarks, copyrights, and trade secrets</li><li>A <b style="color:var(--text);font-weight:500">weighted risk-scoring model</b> across six factors (infringement 30%, business impact 25%, licensing 15%, ownership, documentation, and deadlines 10% each) that rates every asset Critical, High, Medium, or Low</li><li>Views for risk assessments, compliance tracking, deadlines, licenses, an audit log, and reports</li><li>Live patent search through the USPTO Open Data Portal and case-law search through CourtListener</li></ul>
     <h4>// design decision</h4><ul><li>The risk weights live in one place. Change the model once and every asset's score updates automatically, the same way a real risk framework should work.</li></ul>
-    <div class="cta"><a class="btn primary demo" href="https://github.com/Abeladem24/IPGuard" target="_blank" rel="noopener">view code on github →</a></div>`,
+    <div class="cta"><a class="btn primary demo" href="https://ipguard-nine.vercel.app/dashboard" target="_blank" rel="noopener">open live app →</a><a class="btn ghost demo" href="https://github.com/Abeladem24/IPGuard" target="_blank" rel="noopener">view code</a></div>`,
   vuln: `<h3>Independent Vulnerability Assessment</h3><div class="chips"><span class="chip">Nmap</span><span class="chip">Wireshark</span><span class="chip">OWASP BWA</span><span class="chip">CVSS</span></div>
     <h4>// the goal</h4><p>Think like an attacker, then report like a risk analyst.</p>
     <h4>// what I did</h4><ul><li>Scanned the OWASP Broken Web Applications VM with Nmap to enumerate open ports and services</li><li>Analyzed network traffic in Wireshark to surface exposed attack vectors</li></ul>
@@ -410,7 +410,7 @@ const tb = document.getElementById('termBody'), ti = document.getElementById('te
 const cmds = {
   help: `available commands:\n  <b>whoami</b>      who is abel?\n  <b>projects</b>    things I've built\n  <b>experience</b>  where I've worked\n  <b>skills</b>      my toolkit\n  <b>education</b>   school stuff\n  <b>contact</b>     get in touch\n  <b>resume</b>      open my resume\n  <b>clear</b>       clear the screen`,
   whoami: `abel adem: cs junior @ wake forest, politics &amp; int'l affairs minor.\nincoming corporate risk intern @ wells fargo.\nseeking: technology risk &amp; business risk roles.`,
-  projects: `<b>ipguard</b>        IP risk &amp; compliance dashboard, weighted risk scoring (next.js, typescript) → <a href="https://github.com/Abeladem24/IPGuard" target="_blank" rel="noopener">github</a>\n<b>vuln-assessment</b> nmap + wireshark vs. OWASP BWA → CVSS risk report\n<b>pbsnc-portal</b>    member portal data: 10k records at 99.8% integrity, rbac for 500+ users → <a href="https://sigmasofnc.org" target="_blank" rel="noopener">sigmasofnc.org</a>`,
+  projects: `<b>ipguard</b>        IP risk &amp; compliance dashboard, weighted risk scoring (next.js, typescript) → <a href="https://ipguard-nine.vercel.app/dashboard" target="_blank" rel="noopener">live app</a>\n<b>vuln-assessment</b> nmap + wireshark vs. OWASP BWA → CVSS risk report\n<b>pbsnc-portal</b>    member portal data: 10k records at 99.8% integrity, rbac for 500+ users → <a href="https://sigmasofnc.org" target="_blank" rel="noopener">sigmasofnc.org</a>`,
   experience: `<b>2027</b>  wells fargo: corporate risk intern (incoming)\n<b>2026</b>  congressional black caucus foundation: data analyst intern\n<b>2026</b>  wfu law review: associate editor\n<b>2026</b>  phi beta sigma: digital software engineer intern\n<b>2026</b>  wfu school of business: data research assistant\n<b>2024</b>  sosst: data analyst intern\n<b>2023</b>  messer financial: it systems intern`,
   skills: `<b>code</b>      java, python, typescript, sql, next.js\n<b>security</b>  nist 800-53, cvss, rbac, nmap, wireshark, secure coding\n<b>policy</b>    legislative research, contract review, bluebook`,
   education: `wake forest university, b.s. computer science (may 2028)\nminor: politics &amp; international affairs\nactivities: colorstack, nsbe, phi beta sigma, sga, bsa`,
