@@ -1,0 +1,436 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Abel Adem — Tech, Risk &amp; Law</title>
+<meta name="description" content="Abel Adem — Computer Science student at Wake Forest and incoming Wells Fargo Corporate Risk Intern, seeking technology risk and business risk roles.">
+<meta property="og:title" content="Abel Adem — Tech, Risk &amp; Law">
+<meta property="og:description" content="CS @ Wake Forest · Incoming Corporate Risk Intern @ Wells Fargo · Seeking technology risk &amp; business risk roles.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#07090d; --bg2:#0d1117; --card:#111720; --line:#1f2a37;
+  --text:#e6edf3; --muted:#8b98a8; --accent:#3ef0a0; --accent2:#5b8cff; --warn:#ffb547;
+  --mono:'JetBrains Mono',ui-monospace,monospace; --sans:'Space Grotesk',system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);line-height:1.6;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+::selection{background:var(--accent);color:#000}
+
+/* background grid + cursor glow */
+.grid-bg{position:fixed;inset:0;z-index:-2;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:56px 56px;opacity:.35;mask-image:radial-gradient(ellipse at 50% 0%,#000 30%,transparent 75%)}
+.glow{position:fixed;width:600px;height:600px;border-radius:50%;pointer-events:none;z-index:-1;background:radial-gradient(circle,rgba(62,240,160,.12),transparent 60%);transform:translate(-50%,-50%);left:50%;top:30%;transition:left .2s ease-out,top .2s ease-out}
+
+/* nav */
+nav{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:16px clamp(16px,5vw,64px);background:rgba(7,9,13,.7);backdrop-filter:blur(12px);border-bottom:1px solid transparent;transition:border-color .3s}
+nav.scrolled{border-color:var(--line)}
+.logo{font-family:var(--mono);font-weight:600;color:var(--accent)}
+.logo span{color:var(--muted)}
+.nav-links{display:flex;gap:28px;font-family:var(--mono);font-size:.85rem}
+.nav-links a{color:var(--muted);transition:color .2s}
+.nav-links a:hover{color:var(--accent)}
+.nav-links a b{color:var(--accent);font-weight:400}
+@media(max-width:720px){.nav-links{display:none}}
+
+section{padding:110px clamp(16px,5vw,64px);max-width:1180px;margin:0 auto}
+.label{font-family:var(--mono);color:var(--accent);font-size:.85rem;margin-bottom:10px}
+h2{font-size:clamp(1.8rem,4vw,2.6rem);margin-bottom:36px;letter-spacing:-.02em}
+
+/* hero */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding-top:120px}
+.hero .hi{font-family:var(--mono);color:var(--accent);margin-bottom:14px}
+.hero h1{font-size:clamp(2.8rem,9vw,6.2rem);line-height:1;letter-spacing:-.04em}
+.hero h1 .dim{color:var(--muted)}
+.typed{font-family:var(--mono);font-size:clamp(1.05rem,2.6vw,1.6rem);margin:22px 0 18px;min-height:2em;color:var(--text)}
+.typed .caret{display:inline-block;width:.6em;height:1.1em;background:var(--accent);vertical-align:-0.15em;margin-left:4px;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.hero p.pitch{max-width:640px;color:var(--muted);font-size:1.12rem}
+.hero p.pitch b{color:var(--text);font-weight:500}
+.seeking{display:inline-flex;align-items:center;gap:10px;margin-top:22px;font-family:var(--mono);font-size:.88rem;padding:9px 14px;border:1px solid rgba(62,240,160,.35);border-radius:999px;background:rgba(62,240,160,.06);color:var(--text)}
+.seeking b{color:var(--accent);font-weight:600}
+.seeking .dot{width:8px;height:8px;border-radius:50%;background:var(--accent);flex:none;animation:pulse 1.8s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(62,240,160,.6)}70%{box-shadow:0 0 0 9px rgba(62,240,160,0)}100%{box-shadow:0 0 0 0 rgba(62,240,160,0)}}
+.cta{display:flex;gap:14px;flex-wrap:wrap;margin-top:28px}
+.btn{font-family:var(--mono);font-size:.9rem;padding:12px 20px;border-radius:8px;border:1px solid var(--accent);transition:all .2s;display:inline-flex;gap:8px;align-items:center}
+.btn.primary{background:var(--accent);color:#04120b;font-weight:600}
+.btn.primary:hover{box-shadow:0 0 28px rgba(62,240,160,.45);transform:translateY(-2px)}
+.btn.ghost{color:var(--accent)}
+.btn.ghost:hover{background:rgba(62,240,160,.08);transform:translateY(-2px)}
+.scroll-hint{margin-top:70px;font-family:var(--mono);font-size:.8rem;color:var(--muted);animation:bob 2s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(6px)}}
+
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:20px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px}
+.stat .n{font-family:var(--mono);font-size:2rem;color:var(--accent);font-weight:600}
+.stat .t{color:var(--muted);font-size:.9rem}
+@media(max-width:820px){.stats{grid-template-columns:repeat(2,1fr)}}
+
+/* about */
+.about-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:48px;align-items:start}
+.about-grid p{color:var(--muted);margin-bottom:16px;font-size:1.05rem}
+.about-grid p b{color:var(--text);font-weight:500}
+.venn{position:relative;height:300px}
+.venn .c{position:absolute;width:190px;height:190px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:.9rem;mix-blend-mode:screen;transition:transform .4s}
+.venn .c1{left:10%;top:0;background:rgba(62,240,160,.22);border:1px solid var(--accent)}
+.venn .c2{right:10%;top:0;background:rgba(91,140,255,.22);border:1px solid var(--accent2)}
+.venn .c3{left:50%;bottom:0;transform:translateX(-50%);background:rgba(255,181,71,.18);border:1px solid var(--warn)}
+.venn .c1 span{transform:translate(-26px,-20px)} .venn .c2 span{transform:translate(26px,-20px)} .venn .c3 span{transform:translateY(34px)}
+.venn .me{position:absolute;left:50%;top:52%;transform:translate(-50%,-50%);font-family:var(--mono);font-weight:600;color:#fff;font-size:.95rem;text-shadow:0 0 12px #000}
+.venn:hover .c1{transform:translate(-8px,-6px)} .venn:hover .c2{transform:translate(8px,-6px)} .venn:hover .c3{transform:translate(-50%,8px)}
+@media(max-width:820px){.about-grid{grid-template-columns:1fr}.venn{max-width:380px;width:100%;margin:0 auto}.venn .c{width:160px;height:160px}}
+
+/* projects */
+.projects{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:26px;cursor:pointer;position:relative;overflow:hidden;transition:transform .25s,border-color .25s}
+.card::before{content:"";position:absolute;inset:0;background:radial-gradient(400px circle at var(--mx,50%) var(--my,50%),rgba(62,240,160,.10),transparent 40%);opacity:0;transition:opacity .3s}
+.card:hover{transform:translateY(-6px);border-color:var(--accent)}
+.card:hover::before{opacity:1}
+.card .tag{font-family:var(--mono);font-size:.75rem;color:var(--accent2);margin-bottom:12px}
+.card h3{font-size:1.35rem;margin-bottom:10px}
+.card p{color:var(--muted);font-size:.97rem;margin-bottom:18px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font-family:var(--mono);font-size:.72rem;padding:4px 10px;border-radius:999px;background:rgba(62,240,160,.08);color:var(--accent);border:1px solid rgba(62,240,160,.25)}
+.card .more{font-family:var(--mono);font-size:.8rem;color:var(--text);margin-top:18px;display:block}
+
+/* modal */
+.modal{position:fixed;inset:0;z-index:100;background:rgba(0,0,0,.7);backdrop-filter:blur(6px);display:none;align-items:center;justify-content:center;padding:16px}
+.modal.open{display:flex}
+.modal-box{background:var(--bg2);border:1px solid var(--line);border-radius:16px;max-width:680px;width:100%;max-height:88vh;overflow:auto;padding:32px;animation:pop .25s ease-out}
+@keyframes pop{from{opacity:0;transform:scale(.96) translateY(10px)}}
+.modal-box h3{font-size:1.6rem;margin-bottom:6px}
+.modal-box h4{font-family:var(--mono);color:var(--accent);font-size:.85rem;margin:22px 0 8px;font-weight:400}
+.modal-box p,.modal-box li{color:var(--muted)}
+.modal-box ul{padding-left:18px}
+.modal-box .demo{margin-top:24px}
+.close{float:right;font-family:var(--mono);background:none;border:1px solid var(--line);color:var(--muted);border-radius:8px;padding:4px 10px;cursor:pointer}
+.close:hover{color:var(--accent);border-color:var(--accent)}
+
+/* experience */
+.filters{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:30px}
+.filter{font-family:var(--mono);font-size:.82rem;padding:8px 16px;border-radius:999px;border:1px solid var(--line);background:none;color:var(--muted);cursor:pointer;transition:all .2s}
+.filter.active,.filter:hover{border-color:var(--accent);color:var(--accent)}
+.timeline{position:relative;padding-left:28px;border-left:1px solid var(--line)}
+.item{position:relative;padding:0 0 34px 10px;transition:opacity .3s,max-height .4s}
+.item.hide{display:none}
+.item::before{content:"";position:absolute;left:-35px;top:8px;width:12px;height:12px;border-radius:50%;background:var(--bg);border:2px solid var(--accent)}
+.item.upcoming::before{background:var(--accent);box-shadow:0 0 14px var(--accent)}
+.item .when{font-family:var(--mono);font-size:.78rem;color:var(--muted)}
+.item h3{font-size:1.15rem;margin:2px 0}
+.item h3 em{font-style:normal;color:var(--accent)}
+.item ul{color:var(--muted);padding-left:18px;margin-top:6px;font-size:.96rem}
+.badge{font-family:var(--mono);font-size:.68rem;padding:2px 8px;border-radius:6px;background:rgba(62,240,160,.15);color:var(--accent);margin-left:8px;vertical-align:middle}
+
+/* skills */
+.skills{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
+.skill-box{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px}
+.skill-box h3{font-family:var(--mono);font-size:.9rem;color:var(--accent);margin-bottom:14px;font-weight:400}
+
+/* terminal */
+.terminal{background:#05070a;border:1px solid var(--line);border-radius:14px;overflow:hidden;font-family:var(--mono);font-size:.9rem;box-shadow:0 30px 80px rgba(0,0,0,.5)}
+.term-bar{display:flex;gap:8px;padding:12px 14px;background:#0b0f15;border-bottom:1px solid var(--line);align-items:center}
+.term-bar i{width:12px;height:12px;border-radius:50%;display:block}
+.term-bar span{margin-left:10px;color:var(--muted);font-size:.78rem}
+.term-body{padding:18px;height:340px;overflow-y:auto;cursor:text}
+.term-body .out{color:var(--muted);white-space:pre-wrap;margin-bottom:6px}
+.term-body .out b{color:var(--accent);font-weight:400}
+.term-body .out a{color:var(--accent2);text-decoration:underline}
+.prompt{color:var(--accent)}
+.term-line{display:flex;gap:8px}
+.term-line input{flex:1;background:none;border:none;outline:none;color:var(--text);font:inherit;caret-color:var(--accent)}
+.hint{font-family:var(--mono);font-size:.8rem;color:var(--muted);margin-top:12px}
+.hint code{color:var(--accent)}
+
+/* contact */
+.contact{text-align:center}
+.contact h2{font-size:clamp(2rem,6vw,3.6rem)}
+.contact p{color:var(--muted);max-width:560px;margin:0 auto 30px}
+.contact .cta{justify-content:center}
+footer{text-align:center;padding:40px 16px;font-family:var(--mono);font-size:.78rem;color:var(--muted);border-top:1px solid var(--line)}
+
+/* reveal */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<div class="grid-bg"></div>
+<div class="glow" id="glow"></div>
+
+<nav id="nav">
+  <a href="#top" class="logo">abel<span>.adem()</span></a>
+  <div class="nav-links">
+    <a href="#about"><b>01.</b> about</a>
+    <a href="#projects"><b>02.</b> projects</a>
+    <a href="#experience"><b>03.</b> experience</a>
+    <a href="#terminal"><b>04.</b> terminal</a>
+    <a href="#contact"><b>05.</b> contact</a>
+  </div>
+</nav>
+
+<section class="hero" id="top">
+  <div class="hi">&gt; hello world, I'm</div>
+  <h1>Abel Adem<span class="dim">.</span></h1>
+  <div class="typed"><span id="typed"></span><span class="caret"></span></div>
+  <p class="pitch">Computer Science student at <b>Wake Forest University</b> and <b>incoming Corporate Risk Intern at Wells Fargo</b>. I help organizations <b>see risk before it becomes a problem</b>, with an engineer's toolkit and a lawyer's eye for the fine print.</p>
+  <div class="seeking"><span class="dot"></span><span><b>open to:</b> technology risk &amp; business risk roles</span></div>
+  <div class="cta">
+    <a class="btn primary" href="#projects">view my work →</a>
+    <a class="btn ghost" href="Abel_Adem_Resume.pdf" target="_blank" rel="noopener">resume.pdf</a>
+    <a class="btn ghost" href="https://linkedin.com/in/abel-adem-19a283226" target="_blank" rel="noopener">linkedin</a>
+    <a class="btn ghost" href="https://github.com/Abeladem24" target="_blank" rel="noopener">github</a>
+  </div>
+  <div class="stats reveal">
+    <div class="stat"><div class="n" data-count="10000" data-suffix="+">0</div><div class="t">database records validated at 99.8% integrity</div></div>
+    <div class="stat"><div class="n" data-count="1400" data-suffix="">0</div><div class="t">members across 53 service events where I advise on governance</div></div>
+    <div class="stat"><div class="n" data-count="500" data-suffix="+">0</div><div class="t">users secured with role-based access controls</div></div>
+    <div class="stat"><div class="n" data-count="35" data-suffix="%">0</div><div class="t">reduction in application security risk</div></div>
+  </div>
+  <div class="scroll-hint">↓ scroll</div>
+</section>
+
+<section id="about">
+  <div class="label">01. about me</div>
+  <h2>The engineer in the room who reads the fine print.</h2>
+  <div class="about-grid">
+    <div class="reveal">
+      <p>I'm a <b>junior at Wake Forest</b> pursuing a <b>B.S. in Computer Science</b> with a minor in <b>Politics &amp; International Affairs</b>. Most people pick a lane: code, policy, or law. I like the space where they overlap.</p>
+      <p>I've built an <b>IP risk &amp; compliance dashboard</b> with a weighted risk-scoring model, run <b>vulnerability assessments</b> scored with CVSS, and drafted <b>legislative memos for the Congressional Black Caucus</b>. Next summer, I'm joining <b>Wells Fargo as a Corporate Risk Intern</b>.</p>
+      <p>Beyond the classroom, I serve as <b>Associate Editor and Web Developer for the Wake Forest Undergraduate Law Review</b> and as <b>Parliamentarian of the Delta Sigma Chapter of Phi Beta Sigma Fraternity, Inc.</b></p>
+    </div>
+    <div class="venn reveal" aria-hidden="true">
+      <div class="c c1"><span>code</span></div>
+      <div class="c c2"><span>law</span></div>
+      <div class="c c3"><span>risk</span></div>
+      <div class="me">me</div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="label">02. things I've built</div>
+  <h2>Projects</h2>
+  <div class="projects">
+    <div class="card reveal" data-modal="ipguard">
+      <div class="tag">// risk tooling · legal tech</div>
+      <h3>IPguard</h3>
+      <p>An IP risk &amp; compliance dashboard that scores patents, trademarks, copyrights, and trade secrets with a weighted risk model, plus live USPTO and case-law search.</p>
+      <div class="chips"><span class="chip">Next.js</span><span class="chip">TypeScript</span><span class="chip">USPTO API</span><span class="chip">CourtListener</span></div>
+      <span class="more">read case study →</span>
+    </div>
+    <div class="card reveal" data-modal="vuln">
+      <div class="tag">// cybersecurity · risk</div>
+      <h3>Vulnerability Assessment</h3>
+      <p>Attacked an intentionally vulnerable web app, mapped its exposed services, and delivered a CVSS-scored risk report with prioritized fixes.</p>
+      <div class="chips"><span class="chip">Nmap</span><span class="chip">Wireshark</span><span class="chip">OWASP BWA</span><span class="chip">CVSS</span></div>
+      <span class="more">read case study →</span>
+    </div>
+    <div class="card reveal" data-modal="sigma">
+      <div class="tag">// web dev · data</div>
+      <h3>Chapter Websites &amp; Member Data</h3>
+      <p>Built chapter websites for Phi Beta Sigma and validated 10,000+ membership records while managing access for 500+ users.</p>
+      <div class="chips"><span class="chip">HTML/CSS/JS</span><span class="chip">VS Code</span><span class="chip">OpenAI Codex</span><span class="chip">RBAC</span></div>
+      <span class="more">read case study →</span>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="label">03. where I've worked</div>
+  <h2>Experience</h2>
+  <div class="filters" role="tablist">
+    <button class="filter active" data-f="all">all</button>
+    <button class="filter" data-f="tech">tech &amp; security</button>
+    <button class="filter" data-f="law">law &amp; policy</button>
+    <button class="filter" data-f="lead">leadership</button>
+  </div>
+  <div class="timeline">
+    <div class="item upcoming reveal" data-cat="tech">
+      <div class="when">jun 2027 – aug 2027 · charlotte, nc</div>
+      <h3>Corporate Risk Intern <em>@ Wells Fargo</em><span class="badge">incoming</span></h3>
+      <ul><li>Selected for the 2027 Corporate Risk Internship Program through the competitive Change-makers Summit interview process</li></ul>
+    </div>
+    <div class="item reveal" data-cat="law">
+      <div class="when">jun 2026 – aug 2026 · washington, dc</div>
+      <h3>Data Analyst Intern <em>@ Congressional Black Caucus Foundation</em></h3>
+      <ul><li>Drafted a memo on the John R. Lewis Voting Rights Advancement Act, briefing congressional staff on compliance and enforcement</li><li>Used data analysis and AI tools to break down dense statutory language into data-driven, actionable recommendations for decision-makers</li></ul>
+    </div>
+    <div class="item reveal" data-cat="law">
+      <div class="when">jun 2026 – present</div>
+      <h3>Associate Editor &amp; Web Developer <em>@ Wake Forest Undergraduate Law Review</em></h3>
+      <ul><li>Review legal scholarship for Bluebook citation accuracy and doctrinal soundness; production lead for the Fall 2026 issue</li></ul>
+    </div>
+    <div class="item reveal" data-cat="tech">
+      <div class="when">jan 2026 – jun 2026</div>
+      <h3>Digital Software Engineer Intern <em>@ Phi Beta Sigma Fraternity, Inc.</em></h3>
+      <ul><li>Validated 10,000+ database records at 99.8% integrity while administering RBAC for 500+ users</li><li>Designed and built chapter websites with HTML, CSS, and JavaScript in VS Code, using OpenAI Codex for AI-assisted coding</li></ul>
+    </div>
+    <div class="item reveal" data-cat="tech">
+      <div class="when">feb 2026 – apr 2026</div>
+      <h3>Digital Data Research Assistant <em>@ WFU School of Business</em></h3>
+      <ul><li>Evaluated the credibility and authenticity of social media content, assessing information-integrity risk</li><li>Researched digital ownership, online privacy, and technology policy</li></ul>
+    </div>
+    <div class="item reveal" data-cat="lead">
+      <div class="when">dec 2025 – present</div>
+      <h3>Parliamentarian <em>@ Phi Beta Sigma Fraternity, Inc.</em></h3>
+      <ul><li>Enforce governance under Robert's Rules of Order across 53 service events, 1,400 members, and 12 affiliated organizations</li></ul>
+    </div>
+    <div class="item reveal" data-cat="lead">
+      <div class="when">aug 2024 – present</div>
+      <h3>Resident Advisor <em>@ WFU Residence Life &amp; Housing</em></h3>
+      <ul><li>Manage crisis response and incident reporting under privacy and institutional compliance standards</li></ul>
+    </div>
+    <div class="item reveal" data-cat="tech">
+      <div class="when">jun 2024 – aug 2024 · charlotte, nc</div>
+      <h3>Data Analyst Intern <em>@ SoSSt</em></h3>
+      <ul><li>Audited 10+ financial transaction interfaces, cutting vulnerability exposure by 30%</li><li>Identified 8+ front-end vulnerabilities, reducing application security risk by 35%</li></ul>
+    </div>
+    <div class="item reveal" data-cat="tech">
+      <div class="when">jun 2023 – aug 2023 · charlotte, nc</div>
+      <h3>IT Systems &amp; Help Desk Intern <em>@ Messer Financial</em></h3>
+      <ul><li>Resolved 200+ tickets at a 95% first-contact rate; administered least-privilege access for 300+ users</li></ul>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="label">// toolkit</div>
+  <h2>Skills</h2>
+  <div class="skills">
+    <div class="skill-box reveal"><h3>&gt; languages &amp; frameworks</h3><div class="chips"><span class="chip">Java</span><span class="chip">Python</span><span class="chip">SQL</span><span class="chip">TypeScript</span><span class="chip">Next.js</span></div></div>
+    <div class="skill-box reveal"><h3>&gt; security &amp; risk</h3><div class="chips"><span class="chip">NIST SP 800-53</span><span class="chip">CVSS</span><span class="chip">Vulnerability assessment</span><span class="chip">RBAC</span><span class="chip">Secure coding</span><span class="chip">Nmap</span><span class="chip">Wireshark</span><span class="chip">Security+ (in progress)</span></div></div>
+    <div class="skill-box reveal"><h3>&gt; law &amp; policy</h3><div class="chips"><span class="chip">Legislative research</span><span class="chip">Policy memos</span><span class="chip">Contract / clause review</span><span class="chip">Bluebook</span><span class="chip">Audit support</span></div></div>
+  </div>
+</section>
+
+<section id="terminal">
+  <div class="label">04. try it</div>
+  <h2>Ask me anything (sort of).</h2>
+  <div class="terminal reveal">
+    <div class="term-bar"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i><span>guest@abel-adem: ~</span></div>
+    <div class="term-body" id="termBody">
+      <div class="out">Welcome! Type <b>help</b> to see what you can ask.</div>
+      <div class="term-line"><span class="prompt">guest@abel:~$</span><input id="termInput" autocomplete="off" spellcheck="false" aria-label="terminal input"></div>
+    </div>
+  </div>
+  <div class="hint">try: <code>whoami</code> · <code>projects</code> · <code>skills</code> · <code>contact</code> · <code>sudo hire abel</code></div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="label">05. what's next</div>
+  <h2>Let's build something.</h2>
+  <p>I'm looking for <b style="color:var(--text);font-weight:500">technology risk and business risk roles</b>, like my upcoming Corporate Risk internship at Wells Fargo. If your team works where technology, regulation, and risk meet, I'd love to talk.</p>
+  <div class="cta">
+    <a class="btn primary" href="mailto:ademaa24@wfu.edu">say hello →</a>
+    <a class="btn ghost" href="https://linkedin.com/in/abel-adem-19a283226" target="_blank" rel="noopener">linkedin</a>
+    <a class="btn ghost" href="https://github.com/Abeladem24" target="_blank" rel="noopener">github</a>
+    <a class="btn ghost" href="Abel_Adem_Resume.pdf" target="_blank" rel="noopener">resume.pdf</a>
+  </div>
+</section>
+
+<footer>designed &amp; built by Abel Adem · © <span id="yr"></span></footer>
+
+<div class="modal" id="modal" role="dialog" aria-modal="true"><div class="modal-box" id="modalBox"></div></div>
+
+<script>
+// typing effect
+const roles = ["technology risk analyst.", "business risk thinker.", "software engineer.", "legal-tech builder.", "policy researcher."];
+const el = document.getElementById('typed'); let ri = 0, ci = 0, del = false;
+(function type(){
+  const w = roles[ri];
+  el.textContent = w.slice(0, ci);
+  if(!del && ci < w.length){ ci++; setTimeout(type, 70); }
+  else if(!del){ del = true; setTimeout(type, 1500); }
+  else if(ci > 0){ ci--; setTimeout(type, 35); }
+  else { del = false; ri = (ri + 1) % roles.length; setTimeout(type, 300); }
+})();
+
+// cursor glow + card spotlight
+const glow = document.getElementById('glow');
+addEventListener('pointermove', e => { glow.style.left = e.clientX + 'px'; glow.style.top = e.clientY + 'px'; });
+document.querySelectorAll('.card').forEach(c => c.addEventListener('pointermove', e => {
+  const r = c.getBoundingClientRect(); c.style.setProperty('--mx', (e.clientX - r.left) + 'px'); c.style.setProperty('--my', (e.clientY - r.top) + 'px');
+}));
+
+// nav border
+addEventListener('scroll', () => document.getElementById('nav').classList.toggle('scrolled', scrollY > 20));
+
+// reveal + counters
+const io = new IntersectionObserver(es => es.forEach(e => {
+  if(!e.isIntersecting) return;
+  e.target.classList.add('in');
+  e.target.querySelectorAll('[data-count]').forEach(n => {
+    const end = +n.dataset.count, suf = n.dataset.suffix, t0 = performance.now();
+    (function step(t){ const p = Math.min((t - t0) / 1400, 1), v = Math.floor(end * (1 - Math.pow(1 - p, 3)));
+      n.textContent = v.toLocaleString() + (p === 1 ? suf : ''); if(p < 1) requestAnimationFrame(step); })(t0);
+  });
+  io.unobserve(e.target);
+}), {threshold: .15});
+document.querySelectorAll('.reveal').forEach(r => io.observe(r));
+
+// experience filter
+document.querySelectorAll('.filter').forEach(b => b.addEventListener('click', () => {
+  document.querySelectorAll('.filter').forEach(x => x.classList.remove('active')); b.classList.add('active');
+  document.querySelectorAll('.item').forEach(i => i.classList.toggle('hide', b.dataset.f !== 'all' && !i.dataset.cat.split(' ').includes(b.dataset.f)));
+}));
+
+
+// project modals
+const modals = {
+  ipguard: `<h3>IPguard</h3><div class="chips"><span class="chip">Next.js</span><span class="chip">TypeScript</span><span class="chip">USPTO API</span><span class="chip">CourtListener API</span></div>
+    <h4>// the problem</h4><p>A company's intellectual property carries real risk: infringement, licensing gaps, unclear ownership, missed deadlines. That risk is usually scattered across spreadsheets, so nobody sees the full exposure.</p>
+    <h4>// what I built</h4><ul><li>An IP risk &amp; compliance dashboard that tracks patents, trademarks, copyrights, and trade secrets</li><li>A <b style="color:var(--text);font-weight:500">weighted risk-scoring model</b> across six factors (infringement 30%, business impact 25%, licensing 15%, ownership, documentation, and deadlines 10% each) that rates every asset Critical, High, Medium, or Low</li><li>Views for risk assessments, compliance tracking, deadlines, licenses, an audit log, and reports</li><li>Live patent search through the USPTO Open Data Portal and case-law search through CourtListener</li></ul>
+    <h4>// design decision</h4><ul><li>The risk weights live in one place. Change the model once and every asset's score updates automatically, the same way a real risk framework should work.</li></ul>
+    <div class="cta"><a class="btn primary demo" href="https://github.com/Abeladem24/IPGuard" target="_blank" rel="noopener">view code on github →</a></div>`,
+  vuln: `<h3>Independent Vulnerability Assessment</h3><div class="chips"><span class="chip">Nmap</span><span class="chip">Wireshark</span><span class="chip">OWASP BWA</span><span class="chip">CVSS</span></div>
+    <h4>// the goal</h4><p>Think like an attacker, then report like a risk analyst.</p>
+    <h4>// what I did</h4><ul><li>Scanned the OWASP Broken Web Applications VM with Nmap to enumerate open ports and services</li><li>Analyzed network traffic in Wireshark to surface exposed attack vectors</li></ul>
+    <h4>// the deliverable</h4><ul><li>A formal risk assessment package: executive summary, CVSS-based severity ratings, and prioritized mitigation recommendations</li></ul>`,
+  sigma: `<h3>Chapter Websites &amp; Member Data</h3><div class="chips"><span class="chip">HTML/CSS/JS</span><span class="chip">VS Code</span><span class="chip">OpenAI Codex</span><span class="chip">RBAC</span></div>
+    <h4>// the context</h4><p>As Digital Software Engineer Intern for Phi Beta Sigma Fraternity, Inc., I work on the tools chapters use every day.</p>
+    <h4>// what I did</h4><ul><li>Designed and built chapter websites with HTML, CSS, and JavaScript in VS Code, using OpenAI Codex for AI-assisted coding</li><li>Validated 10,000+ records in the membership database, achieving 99.8% data integrity</li><li>Administered role-based access controls for 500+ users handling sensitive personal data</li></ul>`
+};
+const modal = document.getElementById('modal'), box = document.getElementById('modalBox');
+function openModal(k){ box.innerHTML = '<button class="close" aria-label="close">esc ✕</button>' + modals[k]; modal.classList.add('open'); box.querySelector('.close').onclick = closeModal; }
+function closeModal(){ modal.classList.remove('open'); }
+document.querySelectorAll('[data-modal]').forEach(c => c.addEventListener('click', () => openModal(c.dataset.modal)));
+modal.addEventListener('click', e => { if(e.target === modal) closeModal(); });
+addEventListener('keydown', e => { if(e.key === 'Escape') closeModal(); });
+
+// interactive terminal
+const tb = document.getElementById('termBody'), ti = document.getElementById('termInput');
+const cmds = {
+  help: `available commands:\n  <b>whoami</b>      who is abel?\n  <b>projects</b>    things I've built\n  <b>experience</b>  where I've worked\n  <b>skills</b>      my toolkit\n  <b>education</b>   school stuff\n  <b>contact</b>     get in touch\n  <b>resume</b>      open my resume\n  <b>clear</b>       clear the screen`,
+  whoami: `abel adem: cs junior @ wake forest, politics &amp; int'l affairs minor.\nincoming corporate risk intern @ wells fargo.\nseeking: technology risk &amp; business risk roles.`,
+  projects: `<b>ipguard</b>        IP risk &amp; compliance dashboard, weighted risk scoring (next.js, typescript) → <a href="https://github.com/Abeladem24/IPGuard" target="_blank" rel="noopener">github</a>\n<b>vuln-assessment</b> nmap + wireshark vs. OWASP BWA → CVSS risk report\n<b>sigma-web</b>       chapter websites + 10k-record data validation`,
+  experience: `<b>2027</b>  wells fargo: corporate risk intern (incoming)\n<b>2026</b>  congressional black caucus foundation: data analyst intern\n<b>2026</b>  wfu law review: associate editor\n<b>2026</b>  phi beta sigma: digital software engineer intern\n<b>2026</b>  wfu school of business: data research assistant\n<b>2024</b>  sosst: data analyst intern\n<b>2023</b>  messer financial: it systems intern`,
+  skills: `<b>code</b>      java, python, typescript, sql, next.js\n<b>security</b>  nist 800-53, cvss, rbac, nmap, wireshark, secure coding\n<b>policy</b>    legislative research, contract review, bluebook`,
+  education: `wake forest university, b.s. computer science (may 2028)\nminor: politics &amp; international affairs\nactivities: colorstack, nsbe, phi beta sigma, sga, bsa`,
+  contact: `email:    <a href="mailto:ademaa24@wfu.edu">ademaa24@wfu.edu</a>\nlinkedin: <a href="https://linkedin.com/in/abel-adem-19a283226" target="_blank" rel="noopener">abel-adem-19a283226</a>`,
+  resume: () => { window.open('Abel_Adem_Resume.pdf', '_blank'); return 'opening resume.pdf ...'; },
+  'sudo hire abel': `[sudo] password for recruiter: ********\naccess granted ✓  →  <a href="mailto:ademaa24@wfu.edu">ademaa24@wfu.edu</a>`,
+  sudo: `nice try. try <b>sudo hire abel</b>`,
+  ls: `about.txt  projects/  experience.log  resume.pdf`,
+};
+function print(html){ const d = document.createElement('div'); d.className = 'out'; d.innerHTML = html; tb.insertBefore(d, ti.parentElement); }
+ti.addEventListener('keydown', e => {
+  if(e.key !== 'Enter') return;
+  const raw = ti.value.trim(), c = raw.toLowerCase(); ti.value = '';
+  print(`<span class="prompt">guest@abel:~$</span> ${raw.replace(/</g,'&lt;')}`);
+  if(!c) return;
+  if(c === 'clear'){ tb.querySelectorAll('.out').forEach(o => o.remove()); return; }
+  const r = cmds[c]; print(r ? (typeof r === 'function' ? r() : r) : `command not found: ${c.replace(/</g,'&lt;')}. type <b>help</b>`);
+  tb.scrollTop = tb.scrollHeight;
+});
+tb.addEventListener('click', () => ti.focus());
+
+document.getElementById('yr').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
