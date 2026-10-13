@@ -9,7 +9,7 @@
 <meta property="og:description" content="CS @ Wake Forest · Incoming Corporate Risk Intern @ Wells Fargo · Seeking technology risk &amp; business risk roles.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Noto+Sans+Ethiopic:wght@500&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
 :root{
   --bg:#030407; --bg2:#080b12; --card:rgba(10,14,22,.82); --line:#1c2433;
@@ -159,7 +159,7 @@ footer{text-align:center;padding:40px 16px;font-family:var(--mono);font-size:.78
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
 
 /* ===== cyberpunk layer ===== */
-#rain{position:fixed;inset:0;z-index:-3;opacity:.32;pointer-events:none}
+#rain{position:fixed;inset:0;z-index:-3;opacity:.38;pointer-events:none}
 .scanlines{position:fixed;inset:0;z-index:60;pointer-events:none;background:repeating-linear-gradient(to bottom,rgba(255,255,255,.025) 0 1px,transparent 1px 3px)}
 .vignette{position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(ellipse at 50% 40%,transparent 50%,rgba(0,0,0,.6))}
 .glow{background:radial-gradient(circle,rgba(255,43,214,.10),rgba(43,255,198,.06) 40%,transparent 65%)}
@@ -496,23 +496,26 @@ document.getElementById('yr').textContent = new Date().getFullYear();
 (function(){
   const c = document.getElementById('rain');
   if (!c || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  const ctx = c.getContext('2d'), fs = 15, glyphs = '01アカサタナハマ<>{}[]/$#=*+'.split(''),
-        words = ['RISK','CVSS','RBAC','NIST','AUDIT','SUDO','PII','CRITICAL','0x1F','SHA256','AUTH'];
-  let cols, drops, w, h, last = 0;
-  function size(){ w = c.width = innerWidth; h = c.height = innerHeight; cols = Math.ceil(w / fs); drops = Array.from({length: cols}, () => Math.random() * h / fs); }
+  const ctx = c.getContext('2d'), fs = 17,
+        ge = 'ሀለሐመሠረሰሸቀበቨተቸኀነኘአከኸወዐዘዠየደጀገጠጨጰጸፀፈፐሁሉሙሩሱቡቱኑኡኩዉዙዩዱጉጡፉፑ፩፪፫፬፭፮፯፰፱፲፳፴፵፶፷፸፹፺፻'.split(''),
+        mth = '∑∫∂∞π√≈≠≤≥∆∇θλμσΩφ∈∀∃⊂∪∩⊕∧∨¬⇒ℝℕ∏±×÷'.split('');
+  let cols, drops, prev, w, h, last = 0;
+  function size(){ w = c.width = innerWidth; h = c.height = innerHeight; cols = Math.ceil(w / fs); drops = Array.from({length: cols}, () => Math.random() * h / fs); prev = Array(cols).fill(null); }
   size(); addEventListener('resize', size);
+  const pick = () => Math.random() < .62 ? ge[(Math.random() * ge.length) | 0] : mth[(Math.random() * mth.length) | 0];
   function frame(t){
     requestAnimationFrame(frame);
-    if (document.hidden || t - last < 55) return; last = t;
-    ctx.fillStyle = 'rgba(3,4,7,.12)'; ctx.fillRect(0, 0, w, h);
-    ctx.font = fs + 'px JetBrains Mono, monospace';
+    if (document.hidden || t - last < 60) return; last = t;
+    ctx.shadowBlur = 0; ctx.fillStyle = 'rgba(3,4,7,.10)'; ctx.fillRect(0, 0, w, h);
+    ctx.font = fs + 'px "Noto Sans Ethiopic", "JetBrains Mono", serif';
     for (let i = 0; i < cols; i++) {
-      const y = drops[i] * fs;
-      let ch = glyphs[(Math.random() * glyphs.length) | 0];
-      if (Math.random() < .004) { const wd = words[(Math.random() * words.length) | 0]; ch = wd[(drops[i] | 0) % wd.length]; }
-      ctx.fillStyle = Math.random() < .04 ? '#ff2bd6' : (Math.random() < .1 ? '#eafff6' : '#19ff9c');
+      // settle last frame's glowing head into the trail color
+      if (prev[i]) { ctx.shadowBlur = 0; ctx.fillStyle = prev[i].pink ? '#ff2bd6' : '#19ff9c'; ctx.fillText(prev[i].ch, i * fs, prev[i].y); }
+      const y = drops[i] * fs, ch = pick(), pink = Math.random() < .06;
+      ctx.shadowColor = pink ? '#ff2bd6' : '#2bffc6'; ctx.shadowBlur = 14; ctx.fillStyle = '#f2fffb';
       ctx.fillText(ch, i * fs, y);
-      if (y > h && Math.random() > .975) drops[i] = 0;
+      prev[i] = {ch, y, pink};
+      if (y > h && Math.random() > .975) { drops[i] = 0; prev[i] = null; }
       drops[i] += 1;
     }
   }
