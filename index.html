@@ -232,10 +232,10 @@ footer{text-align:center;padding:40px 16px;font-family:var(--mono);font-size:.78
       <span class="more">read case study →</span>
     </div>
     <div class="card reveal" data-modal="sigma">
-      <div class="tag">// web dev · data</div>
-      <h3>Chapter Websites &amp; Member Data</h3>
-      <p>Built chapter websites for Phi Beta Sigma and validated 10,000+ membership records while managing access for 500+ users.</p>
-      <div class="chips"><span class="chip">HTML/CSS/JS</span><span class="chip">VS Code</span><span class="chip">OpenAI Codex</span><span class="chip">RBAC</span></div>
+      <div class="tag">// data integrity · access control</div>
+      <h3>Sigmas of NC: Member Portal &amp; Data</h3>
+      <p>Worked on the member portal and data behind the Phi Beta Sigma North Carolina state site, validating 10,000+ records and controlling access for 500+ users.</p>
+      <div class="chips"><span class="chip">Data integrity</span><span class="chip">RBAC</span><span class="chip">PII protection</span><span class="chip">Web dev</span></div>
       <span class="more">read case study →</span>
     </div>
   </div>
@@ -392,9 +392,11 @@ const modals = {
     <h4>// the goal</h4><p>Think like an attacker, then report like a risk analyst.</p>
     <h4>// what I did</h4><ul><li>Scanned the OWASP Broken Web Applications VM with Nmap to enumerate open ports and services</li><li>Analyzed network traffic in Wireshark to surface exposed attack vectors</li></ul>
     <h4>// the deliverable</h4><ul><li>A formal risk assessment package: executive summary, CVSS-based severity ratings, and prioritized mitigation recommendations</li></ul>`,
-  sigma: `<h3>Chapter Websites &amp; Member Data</h3><div class="chips"><span class="chip">HTML/CSS/JS</span><span class="chip">VS Code</span><span class="chip">OpenAI Codex</span><span class="chip">RBAC</span></div>
-    <h4>// the context</h4><p>As Digital Software Engineer Intern for Phi Beta Sigma Fraternity, Inc., I work on the tools chapters use every day.</p>
-    <h4>// what I did</h4><ul><li>Designed and built chapter websites with HTML, CSS, and JavaScript in VS Code, using OpenAI Codex for AI-assisted coding</li><li>Validated 10,000+ records in the membership database, achieving 99.8% data integrity</li><li>Administered role-based access controls for 500+ users handling sensitive personal data</li></ul>`
+  sigma: `<h3>Sigmas of NC: Member Portal &amp; Data</h3><div class="chips"><span class="chip">Data integrity</span><span class="chip">RBAC</span><span class="chip">PII protection</span><span class="chip">Web dev</span></div>
+    <h4>// the context</h4><p>Sigmas of North Carolina (PBSNC) is the state organization for Phi Beta Sigma Fraternity, Inc., one of the largest states in the fraternity. Its member portal holds sensitive personal data for brothers across North Carolina.</p>
+    <h4>// what I did</h4><ul><li>Worked on the member portal and data behind the state site as a Digital Software Engineer Intern</li><li>Validated 10,000+ membership records, achieving 99.8% data integrity</li><li>Administered role-based access controls for 500+ users handling sensitive PII</li><li>Also designed and built chapter websites with HTML, CSS, and JavaScript</li></ul>
+    <h4>// why it matters</h4><ul><li>Bad member data and loose access controls are a real operational and privacy risk. This work was about making sure the data is right and only the right people can see it.</li></ul>
+    <div class="cta"><a class="btn primary demo" href="https://sigmasofnc.org" target="_blank" rel="noopener">visit sigmasofnc.org →</a></div>`
 };
 const modal = document.getElementById('modal'), box = document.getElementById('modalBox');
 function openModal(k){ box.innerHTML = '<button class="close" aria-label="close">esc ✕</button>' + modals[k]; modal.classList.add('open'); box.querySelector('.close').onclick = closeModal; }
@@ -408,7 +410,7 @@ const tb = document.getElementById('termBody'), ti = document.getElementById('te
 const cmds = {
   help: `available commands:\n  <b>whoami</b>      who is abel?\n  <b>projects</b>    things I've built\n  <b>experience</b>  where I've worked\n  <b>skills</b>      my toolkit\n  <b>education</b>   school stuff\n  <b>contact</b>     get in touch\n  <b>resume</b>      open my resume\n  <b>clear</b>       clear the screen`,
   whoami: `abel adem: cs junior @ wake forest, politics &amp; int'l affairs minor.\nincoming corporate risk intern @ wells fargo.\nseeking: technology risk &amp; business risk roles.`,
-  projects: `<b>ipguard</b>        IP risk &amp; compliance dashboard, weighted risk scoring (next.js, typescript) → <a href="https://github.com/Abeladem24/IPGuard" target="_blank" rel="noopener">github</a>\n<b>vuln-assessment</b> nmap + wireshark vs. OWASP BWA → CVSS risk report\n<b>sigma-web</b>       chapter websites + 10k-record data validation`,
+  projects: `<b>ipguard</b>        IP risk &amp; compliance dashboard, weighted risk scoring (next.js, typescript) → <a href="https://github.com/Abeladem24/IPGuard" target="_blank" rel="noopener">github</a>\n<b>vuln-assessment</b> nmap + wireshark vs. OWASP BWA → CVSS risk report\n<b>pbsnc-portal</b>    member portal data: 10k records at 99.8% integrity, rbac for 500+ users → <a href="https://sigmasofnc.org" target="_blank" rel="noopener">sigmasofnc.org</a>`,
   experience: `<b>2027</b>  wells fargo: corporate risk intern (incoming)\n<b>2026</b>  congressional black caucus foundation: data analyst intern\n<b>2026</b>  wfu law review: associate editor\n<b>2026</b>  phi beta sigma: digital software engineer intern\n<b>2026</b>  wfu school of business: data research assistant\n<b>2024</b>  sosst: data analyst intern\n<b>2023</b>  messer financial: it systems intern`,
   skills: `<b>code</b>      java, python, typescript, sql, next.js\n<b>security</b>  nist 800-53, cvss, rbac, nmap, wireshark, secure coding\n<b>policy</b>    legislative research, contract review, bluebook`,
   education: `wake forest university, b.s. computer science (may 2028)\nminor: politics &amp; international affairs\nactivities: colorstack, nsbe, phi beta sigma, sga, bsa`,
